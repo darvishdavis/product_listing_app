@@ -78,10 +78,12 @@ class DetailScreen extends StatelessWidget {
           const SizedBox(height: 28),
           FilledButton.icon(
             onPressed: () {
-              context.read<CartCubit>().add(product.id);
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Added to cart')),
-              );
+              final wasAdded = context.read<CartCubit>().add(product.id);
+              if (wasAdded) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Added to cart')),
+                );
+              }
             },
             icon: const Icon(Icons.add_shopping_cart),
             label: const Text('Add to cart'),
