@@ -1,16 +1,31 @@
-# product_listing_app
+# Shoply - Product Listing App
 
-A new Flutter project.
+A small Flutter product browser built for the interview exercise. It fetches products from the [Fake Store API](https://fakestoreapi.com/products), supports local search and category filtering, and includes product details, favorites, and a cart badge.
 
-## Getting Started
+## Run locally
 
-This project is a starting point for a Flutter application.
+```bash
+flutter pub get
+flutter run
+```
 
-A few resources to get you started if this is your first Flutter project:
+Run the checks with:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+```bash
+flutter analyze
+flutter test
+```
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Structure
+
+- `lib/models`: API/domain models
+- `lib/data`: HTTP API client and response validation
+- `lib/logic`: Cubits for product UI state and cart state
+- `lib/screens`: home and detail screens
+- `lib/widgets`: reusable product card
+
+`flutter_bloc` keeps network state and UI interactions out of the widgets. Favorites and cart contents are intentionally in-memory because persistence and a full cart screen were optional for this exercise.
+
+## Assumptions
+
+The API is treated as an external dependency: loading, HTTP/format errors, retry, and empty filtered results are all represented in the UI. Product images are loaded remotely and show a fallback icon if an image cannot be displayed.
