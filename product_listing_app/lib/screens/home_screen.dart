@@ -56,10 +56,13 @@ class HomeScreen extends StatelessWidget {
                               .read<ProductCubit>()
                               .toggleFavorite(product.id),
                           onAddToCart: () {
-                            context.read<CartCubit>().add(product.id);
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('Added to cart')),
-                            );
+                            final wasAdded =
+                                context.read<CartCubit>().add(product.id);
+                            if (wasAdded) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(content: Text('Added to cart')),
+                              );
+                            }
                           },
                           onTap: () => Navigator.of(context).push(
                             MaterialPageRoute(

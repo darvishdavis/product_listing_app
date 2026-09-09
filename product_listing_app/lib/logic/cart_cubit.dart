@@ -11,10 +11,14 @@ class CartState {
 class CartCubit extends Cubit<CartState> {
   CartCubit() : super(const CartState({}));
 
-  void add(int productId) {
+  bool add(int productId) {
+    if (state.items.containsKey(productId)) {
+      return false;
+    }
     emit(CartState({
       ...state.items,
-      productId: (state.items[productId] ?? 0) + 1,
+      productId: 1,
     }));
+    return true;
   }
 }
